@@ -45,4 +45,4 @@ def find_path(graph, node, end, visited=None):
     # None of our neighbors has a path to 'end' -> give up.
     return False
 
-print(find_path(graph, "ksr", "ksr"))
+print(find_path(graph, "ksr", "bahnhof"))
