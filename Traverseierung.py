@@ -19,4 +19,4 @@ def dfs(graph, node, visited):
         dfs(graph, neighbor, visited)   # Nachbarn mit eigener Funktion besuchen
     return visited                      # Alle besuchten zurückgeben
 
-print(dfs(graph,"weitenzelgstr", None))
+print(dfs(graph,"ksr", None))
