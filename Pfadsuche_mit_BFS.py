@@ -20,8 +20,6 @@ def create_path(visited,start, end):
     path.append(start)
     return list(reversed(path))
     
-    
-
 
 def bfs (graph, start, end):
     candidates= [start] # bekannt, aber noch nicht besucht
@@ -46,4 +44,4 @@ def bfs (graph, start, end):
 
     return visited
 
-print (bfs(graph, "ksr"))
+print(bfs(graph, "ksr"))
