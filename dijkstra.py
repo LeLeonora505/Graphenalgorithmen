@@ -13,46 +13,46 @@ graph = {
 }
 
 
+def build_path_from_parents(graph, parents, start, end):
+    """Baut den Pfad vom Start- zum Endknoten mithilfe des parents-Dictionarys auf."""
+    path = [end]
+    while path[-1] != start:
+        if path[-1] not in parents:
+            return None  # Kein Pfad vorhanden
+        path.append(parents[path[-1]])
+    path.reverse()
+    return path
+
 def shortest_path(graph, start, end):
     """Dijkstra shortest path."""
-    # Candidates to process next, ordered by increasing distance.
-    # The head of the queue is guaranteed to be the next node to be visited,
-    # while the order of subsequent nodes could still be reordered if and preceding
-    # node offers a shorter path to them.
     candidates = PriorityQueue()
     candidates.put((0, start))
     parents = {}
-    # In addition to BFS, we record for each discovered node the currently known shortest
-    # distance from start.
     distances = {start: 0}
-    while candidates:
-        print(distances)
-        print(candidates.queue)
-        input()
- 
-        # Let's visit the closest node not yet visited. The first candidate node is
-        # guaranteed to be the closest one of the candidates.
+    
+    while not candidates.empty():
         distance, node = candidates.get()
-        if node == end:  # We're done.
+        
+        if node == end:  # Wir sind am Ziel angekommen
             return build_path_from_parents(graph, parents, start, end)
+            
         if distances.get(node, inf) < distance:
-            continue  # Node was already visited. See comment below.
- 
+            continue  # Knoten wurde bereits über einen kürzeren Weg besucht
+    
         for neighbor, edge in graph[node].items():
             new_distance = distance + edge
             old_distance = distances.get(neighbor, inf)
+            
             if old_distance <= new_distance:
-                continue  # Neighbor already discovered via some shorter path
-            # Otherwise: we discovered a shorter (or new) path to neighbor - record it
-            # and add to candidates.
+                continue  # Nachbar wurde bereits über einen kürzeren Weg entdeckt
+                
             distances[neighbor] = new_distance
- 
-            # To be correct, we'd need to remove any old record (old_distance, neighbor) 
-            # in the candidates, but that is expensive. Instead, we leave it in and
-            # rely on the fact that the neighbor will be visited only once through the shortest
-            # path.
             candidates.put((new_distance, neighbor))
             parents[neighbor] = node
-    return None  # No path found
+            
+    return None  # Kein Pfad gefunden
 
-print (shortest_path(graph, "ksr", "bahnhof"))
+    
+    
+ergebnis = shortest_path(graph, 'ksr', 'bahnhof')
+print("Gefundener Pfad:", ergebnis)
