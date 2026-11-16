@@ -24,7 +24,7 @@ def build_path_from_parents(graph, parents, start, end):
     return path
 
 def shortest_path(graph, start, end):
-    """Dijkstra shortest path."""
+    
     candidates = PriorityQueue()
     candidates.put((0, start))
     parents = {}
